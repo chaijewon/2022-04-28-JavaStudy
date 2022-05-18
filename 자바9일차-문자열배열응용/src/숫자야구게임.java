@@ -57,6 +57,7 @@ public class 숫자야구게임 {
 		int[] com=new int[3];//난수
 		int[] user=new int[3];// 사용자 입력값 
 		//2. 컴퓨터 난수 => 중복이 없는 난수 발생 
+		//////////////////////////////////////////////////
 		int su=0; // 난수를 저장하는 변수 
 		boolean bCheck=false; // 중복여부 확인
 		/*
@@ -99,6 +100,7 @@ public class 숫자야구게임 {
 					
 			com[i]=su;
 		}
+		////////////////////////////////////////////
 		//System.out.println("com="+Arrays.toString(com));
 		// ====== 반복문 => while
 		//3. 사용자 입력 
