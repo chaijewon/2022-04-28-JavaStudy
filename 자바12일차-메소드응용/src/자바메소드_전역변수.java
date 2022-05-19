@@ -89,7 +89,30 @@ public class 자바메소드_전역변수 {
 	}
 	static void singerFind()
 	{
-		
+		//1.가수명 입력 
+		//2.singer[] => 전체 (singer,title=> 인덱스) 0 => 0
+		/*
+		 *   class Music
+		 *   {
+		 *      String title;
+		 *      String singer;
+		 *      
+		 *   }
+		 */
+		//3.=> 인덱스번호 
+		Scanner scan=new Scanner(System.in);
+		System.out.print("가수명 입력:");
+		String s=scan.next();
+		// int(nextInt()) , String(next(),nextLine())
+		// next(): 공백을 포함하지 않는다  nextLine():공백 포함 
+		for(int i=0;i<singer.length;i++)
+		{
+			//if(s.equals(singer[i]))
+			if(singer[i].contains(s)) // startsWith
+			{
+				System.out.println(title[i]);
+			}
+		}
 	}
 	// 조립기 
 	static void process()
@@ -116,7 +139,7 @@ public class 자바메소드_전역변수 {
 			}
 			else if(m==4)
 			{
-				
+				singerFind();
 			}
 		}
 	}
