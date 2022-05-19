@@ -69,10 +69,23 @@ public class 달력만들기_절차적언어 {
 		{
 			System.out.print(s+"\t");
 		}
-		System.out.println();
+		System.out.println("\n");
 		for(int i=1;i<=lastday[month-1];i++)
 		{
-			
+			if(i==1) // 맨처음 한번만 수행 (요일까지 공백)
+			{
+				for(int j=0;j<week;j++)
+				{
+					System.out.print("\t");
+				}
+			}
+			System.out.printf("%2d\t",i);
+			week++;
+			if(week>6)
+			{
+				week=0;
+				System.out.println("\n");
+			}
 		}
 		
 	}
