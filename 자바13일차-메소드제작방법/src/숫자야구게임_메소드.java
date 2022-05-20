@@ -107,6 +107,7 @@ public class 숫자야구게임_메소드 {
 	static void process()
 	{
 		int[] com=getRand();
+		Scanner scan=new Scanner(System.in);
 		while(true)
 		{
 			int[] user=userInput();
@@ -114,8 +115,18 @@ public class 숫자야구게임_메소드 {
 			
 			if(isEnd(s))
 			{
-				System.out.println("Game Over!!");
-				break;
+				System.out.print("게임의 다시 할까요?(y|Y):");
+				String msg=scan.next();
+				char c=msg.charAt(0);
+				if(c=='y' || c=='Y')
+				{
+					process();
+				}
+				else
+				{
+					System.out.println("Game Over!!");
+					System.exit(0);
+				}
 			}
 		}
 	}
