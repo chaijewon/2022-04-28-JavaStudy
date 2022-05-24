@@ -41,11 +41,14 @@ public class 사원클래스 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String[] name= {"홍길동","심청이","이순신"};String[] dept= {"개발부","영업부","총무부"};String[] job= {"과장","대리","사원"};
-		String[] loc= {"서울","부산","인천"};int[] pay= {4500,3500,3000};
-        Sawon[] sawon=new Sawon[5];// 저장 공간은 아직 생성이 안됨 
+		String[] name= {"홍길동","심청이","이순신"};
+		String[] dept= {"개발부","영업부","총무부"};
+		String[] job= {"과장","대리","사원"};
+		String[] loc= {"서울","부산","인천"};
+		int[] pay= {4500,3500,3000};
+        Sawon[] sawon=new Sawon[3];// 저장 공간은 아직 생성이 안됨 
         Scanner scan=new Scanner(System.in);
-        for(int i=0;i<5;i++)
+        for(int i=0;i<3;i++)
         {
         	//System.out.println(sawon[i]);
         	sawon[i]=new Sawon();//저장 공간 
