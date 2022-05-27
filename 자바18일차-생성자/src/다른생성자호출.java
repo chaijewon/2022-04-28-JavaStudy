@@ -20,6 +20,11 @@
  *      }
  *   }
  */
+class A
+{
+	static final int LOGIN=100;
+	
+}
 class Sawon
 {
 	// 생성자가 여러개 => 오버로딩 
@@ -59,6 +64,7 @@ class Sawon
 	 */
 	Sawon(double d) {
 		System.out.println("d="+d);
+		//int a=Integer.MAX_VALUE;
 	}
 	Sawon(char c)
 	{

@@ -22,6 +22,13 @@ class Student{
 	String name="홍길동";
 	int kor=90,eng=80,math=70; // final => 데이터베이스 URL 
 	Student() {
+		{
+			{
+				{
+					// 변수의 사용범위 지정 (scope)
+				}
+			}
+		}
 		try
 		{
 			FileReader fr=new FileReader("c:\\javaDev\\student.txt");

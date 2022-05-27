@@ -8,6 +8,12 @@ https://movie-phinf.pstatic.net/20161223_27/1482473208056HzFgF_JPEG/movie_image.
 2017 .01.11 개봉
 청소년 관람불가
 톰 포드
+     이름 , 국어 , 영어 , 수학  => 5
+     String[] name=new String[5];
+     int[] kor =new in[5];
+     ..
+     ..
+     ..
  */
 public class Movie {
    int mno;
