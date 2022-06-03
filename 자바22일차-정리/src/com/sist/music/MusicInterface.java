@@ -1,4 +1,5 @@
 package com.sist.music;
+import java.io.IOException;
 /*
  *    설계 / 구현 (인도)
  *    ---  ----
@@ -69,10 +70,15 @@ public interface MusicInterface {
 	   char yn=scan.next().charAt(0);
 	   if(yn=='Y'||yn=='y')
 	   {
-		   try
-		   {
-			   Runtime.getRuntime().exec("C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe http://youtube.com/embed/"+m.getKey());
-		   }catch(Exception ex){}
+		   //try
+		   //{
+			   try {
+				Runtime.getRuntime().exec("C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe http://youtube.com/embed/"+m.getKey());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		   //}catch(Exception ex){}
 	   }
    }
    public default int musicMenu()
