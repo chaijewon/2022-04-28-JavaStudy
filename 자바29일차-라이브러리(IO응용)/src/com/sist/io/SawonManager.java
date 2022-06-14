@@ -97,8 +97,106 @@ public class SawonManager {
 	   fileSave();
    }
    // 3. 사원수정 
+   public void sawonUpdate()
+   {
+	   Scanner scan=new Scanner(System.in);
+	   sawonList();
+	   System.out.println("===============");
+	   System.out.print("사번 입력:");
+	   int sabun=scan.nextInt();
+	   
+	   System.out.print("이름 입력:");
+	   String name=scan.next();
+	   
+	   System.out.print("직위 입력:");
+	   String job=scan.next();
+	   
+	   System.out.print("부서 입력:");
+	   String dept=scan.next();
+	   
+	   System.out.print("근무지 입력:");
+	   String loc=scan.next();
+	   
+	   System.out.print("입사일 입력:");
+	   String day=scan.next();
+	   
+	   System.out.print("연봉 입력:");
+	   int pay=scan.nextInt();
+	   
+	   Sawon sa=new Sawon();
+	   sa.setName(name);
+	   sa.setJob(job);
+	   sa.setDept(dept);
+	   sa.setLoc(loc);
+	   sa.setHiredate(day);
+	   sa.setPay(pay);
+	   sa.setSabun(sabun);
+	   // sabun => 고유번호 
+	   int k=0;
+	   for(Sawon s:list)
+	   {
+		   if(s.getSabun()==sa.getSabun())
+		   {
+			   list.set(k, sa);
+			   break;
+		   }
+		   k++;
+	   }
+	   
+	   fileSave();
+	   
+   }
    // 4. 사원 상세보기 
+   public void sawonDetail()
+   {
+	   Scanner scan=new Scanner(System.in);
+	   sawonList();
+	   System.out.println("=================");
+	   System.out.print("사번 입력:");
+	   int sabun=scan.nextInt();
+	   
+	   for(Sawon sa:list)
+	   {
+		   if(sa.getSabun()==sabun)// primary key 
+		   {
+			   System.out.println("사번:"+sa.getSabun());
+			   System.out.println("이름:"+sa.getName());
+			   System.out.println("부서:"+sa.getDept());
+			   System.out.println("근무지:"+sa.getLoc());
+			   System.out.println("직위:"+sa.getJob());
+			   System.out.println("입사일:"+sa.getHiredate());
+			   System.out.println("연봉:"+sa.getPay());
+			   break;
+		   }
+	   }
+   }
    // 5. 사원삭제 
+   public void sawonDelete()
+   {
+	   Scanner scan=new Scanner(System.in);
+	   for(Sawon sa:list)
+	   {
+		   System.out.println(sa.getSabun()+"."+sa.getName());
+	   }
+	   System.out.println("===============");
+	   System.out.print("삭제할 사번을 선택하세요:");
+	   int sabun=scan.nextInt();
+	   for(Sawon sa:list)
+	   {
+		   if(sa.getSabun()==sabun)
+		   {
+			   list.remove(sa);
+			   /*
+			    *   remove(int)
+			    *   remove(Object)
+			    */
+			   break;
+		   }
+	   }
+	   
+	   fileSave();
+	   
+   }
    // 6. 메뉴 
    public int menu()
    {
