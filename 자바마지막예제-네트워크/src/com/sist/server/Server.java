@@ -84,11 +84,14 @@ public class Server implements Runnable{
 		// TODO Auto-generated method stub
 		try
 		{
+		  while(true)
+		  {
 			Socket s=ss.accept(); // 특별한 메소드 (클라이언트가 접속시에만 호출)
 			// Socket => ip ,port => 클라이언트의 발신자 정보 
 			// 통신을 시작한다 
 			Client client=new Client(s);
 			client.start(); // run() => 통신을 시작한다 
+		  }
 		}catch(Exception ex){}
 		
 	}

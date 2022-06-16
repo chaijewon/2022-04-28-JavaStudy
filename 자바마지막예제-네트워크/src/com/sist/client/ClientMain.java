@@ -1,6 +1,9 @@
 package com.sist.client;
 
 import javax.swing.*;
+
+import com.sist.common.Function;
+
 import java.awt.*;
 import java.awt.event.*;
 //// 윈도우 
@@ -8,18 +11,26 @@ import java.util.*;
 import java.net.*;
 import java.io.*;
 //// 네트워크 관련 
-public class ClientMain extends JFrame{
+public class ClientMain extends JFrame implements ActionListener,Runnable{
     CardLayout card=new CardLayout();
     Login login=new Login();
     WaitRoom wr=new WaitRoom();
+    /// NetWork관련 
+    Socket s;// 서버와 연결된 연결기기 
+    BufferedReader in;// 서버로부터 값을 읽어 온다 
+    OutputStream out;// 서버로 값을 보낸다 
     public ClientMain()
     {
     	setLayout(card);//배치
-    	add("WR",wr);
+    	
     	add("LOGIN",login);
+    	add("WR",wr);
     	setSize(800, 700);// 윈도우 크기
     	setVisible(true);// 윈도우를 보여달라 
-    	setDefaultCloseOperation(EXIT_ON_CLOSE);// 종료 
+    	setDefaultCloseOperation(EXIT_ON_CLOSE);// 종료
+    	// 이벤트 등록 
+    	login.b1.addActionListener(this);
+    	login.b2.addActionListener(this);
     }
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -30,6 +41,92 @@ public class ClientMain extends JFrame{
 			   e.printStackTrace();
 			  }
         new ClientMain();
+	}
+	// 서버 연결 
+	public void connection(String id,String name,String sex)
+	{
+		try
+		{
+			s=new Socket("localhost",3355);
+			// 서버를 연결해서 서버 정보를 읽어 온다 (ip,port)
+			in=new BufferedReader(new InputStreamReader(s.getInputStream()));
+			out=s.getOutputStream();
+			// 로그인 요청 
+			out.write((Function.LOGIN+"|"+id+"|"+name+"|"+sex+"\n").getBytes());
+		}catch(Exception ex){}
+		//쓰레드를 이용해서 서버로부터 값을 읽어라 
+		new Thread(this).start(); // run()을 호출한다 
+	}
+	// 서버에서 값을 읽어 온다
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		try
+		{
+			while(true)
+			{
+				String msg=in.readLine();// 서버 응답값 받기
+				StringTokenizer st=
+						new StringTokenizer(msg,"|");
+				int protocol=Integer.parseInt(st.nextToken());
+				switch(protocol)
+				{
+				  case Function.LOGIN:
+				  {
+					  String[] data= {
+						st.nextToken(),	 //ID
+						st.nextToken(),	 //Name
+						st.nextToken(),	 //Sex
+						st.nextToken()   // 방위치 
+					  };
+					  wr.model2.addRow(data);
+				  }
+				  
+				  break;
+				  case Function.MYLOG:
+				  {
+					  card.show(getContentPane(), "WR");
+				  }
+				  break;
+				}
+			}
+		}catch(Exception ex){}
+	}
+	// 버튼 처리 (요청)
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource()==login.b1) //로그인버튼 클릭 
+		{
+			String id=login.tf1.getText();
+			if(id.length()<1) // 입력이 안된 경우 
+			{
+				JOptionPane.showMessageDialog(this, "ID를 입력하세요");
+				login.tf1.requestFocus();
+				return; // 메소드 종료 
+			}
+			
+			String name=login.tf2.getText();
+			if(name.length()<1) // 입력이 안된 경우 
+			{
+				JOptionPane.showMessageDialog(this, "이름을 입력하세요");
+				login.tf2.requestFocus();
+				return; // 메소드 종료 
+			}
+			
+			String sex="";
+			if(login.rb1.isSelected())
+				sex="남자";
+			else
+				sex="여자";
+			
+			connection(id, name, sex);
+		}
+		else if(e.getSource()==login.b2) //취소
+		{
+			dispose(); // 메모리 삭제 
+			System.exit(0);//프로그램 종료
+		}
 	}
 
 }
