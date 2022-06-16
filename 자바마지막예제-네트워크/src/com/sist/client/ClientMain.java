@@ -30,7 +30,9 @@ public class ClientMain extends JFrame implements ActionListener,Runnable{
     	setDefaultCloseOperation(EXIT_ON_CLOSE);// 종료
     	// 이벤트 등록 
     	login.b1.addActionListener(this);
+    	// this => 처리하는 메소드가 있는 클래스 
     	login.b2.addActionListener(this);
+    	wr.tf.addActionListener(this);
     }
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -88,6 +90,11 @@ public class ClientMain extends JFrame implements ActionListener,Runnable{
 					  card.show(getContentPane(), "WR");
 				  }
 				  break;
+				  case Function.WAITCHAT:
+				  {
+					  wr.ta.append(st.nextToken()+"\n");
+				  }
+				  break;
 				}
 			}
 		}catch(Exception ex){}
@@ -126,6 +133,18 @@ public class ClientMain extends JFrame implements ActionListener,Runnable{
 		{
 			dispose(); // 메모리 삭제 
 			System.exit(0);//프로그램 종료
+		}
+		else if(e.getSource()==wr.tf)// 채팅
+		{
+			String msg=wr.tf.getText(); // 입력된 채팅 문자열 읽기
+			if(msg.length()<1) 
+				return;
+			try
+			{
+				// 서버로 전송 
+				out.write((Function.WAITCHAT+"|"+msg+"\n").getBytes());
+			}catch(Exception ex) {}
+			wr.tf.setText("");
 		}
 	}
 

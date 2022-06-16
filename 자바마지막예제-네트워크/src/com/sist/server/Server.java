@@ -171,6 +171,7 @@ public class Server implements Runnable{
 						   messageAll(Function.LOGIN+"|"
 								   +id+"|"+name+""+"|"
 								   +sex+"|"+pos);//오라클
+						   messageAll(Function.WAITCHAT+"|[알림 ☞]"+name+"입장하셨습니다!");
 						   // waiVc에 저장 
 						   waitVc.add(this);
 						   messageTo(Function.MYLOG+"|"+id);
@@ -188,7 +189,8 @@ public class Server implements Runnable{
 					   break;
 					   case Function.WAITCHAT:
 					   {
-						   
+						   String data=st.nextToken();
+						   messageAll(Function.WAITCHAT+"|["+name+"]"+data);
 					   }
 					   break;
 					}

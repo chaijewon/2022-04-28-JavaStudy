@@ -12,6 +12,7 @@ public class WaitRoom extends JPanel{
      {
     	 ta=new JTextArea();
     	 JScrollPane js1=new JScrollPane(ta);
+    	 ta.setEditable(false);
     	 
     	 tf=new JTextField();
     	 b1=new JButton("방만들기");
