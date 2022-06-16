@@ -29,10 +29,11 @@ public class ClientMain extends JFrame implements ActionListener,Runnable{
     	setVisible(true);// 윈도우를 보여달라 
     	setDefaultCloseOperation(EXIT_ON_CLOSE);// 종료
     	// 이벤트 등록 
-    	login.b1.addActionListener(this);
+    	login.b1.addActionListener(this);//로그인 
     	// this => 처리하는 메소드가 있는 클래스 
-    	login.b2.addActionListener(this);
-    	wr.tf.addActionListener(this);
+    	login.b2.addActionListener(this);// 로그인 취소
+    	wr.tf.addActionListener(this);// 채팅 (엔터)
+    	wr.b6.addActionListener(this);// 나가기 
     }
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -100,6 +101,15 @@ public class ClientMain extends JFrame implements ActionListener,Runnable{
 		}catch(Exception ex){}
 	}
 	// 버튼 처리 (요청)
+	/*
+	 *    로그인 
+	 *      = 이미 로그인된 사람
+	 *      = 로그인하는 사람 
+	 *    나가기 
+	 *      = 나가는 사람
+	 *      = 남아있는 사람 
+	 *    방들어가기 
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -129,6 +139,8 @@ public class ClientMain extends JFrame implements ActionListener,Runnable{
 			
 			connection(id, name, sex);
 		}
+		// music.jsp?cno=1
+		// 
 		else if(e.getSource()==login.b2) //취소
 		{
 			dispose(); // 메모리 삭제 
@@ -145,6 +157,14 @@ public class ClientMain extends JFrame implements ActionListener,Runnable{
 				out.write((Function.WAITCHAT+"|"+msg+"\n").getBytes());
 			}catch(Exception ex) {}
 			wr.tf.setText("");
+		}
+		else if(e.getSource()==wr.b6)// 나가기 버튼 클릭 
+		{
+			try
+			{
+				out.write((Function.CHATEND+"|\n").getBytes());
+				// 서버로 채팅을 종료한다 요청 
+			}catch(Exception ex){}
 		}
 	}
 

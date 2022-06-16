@@ -175,6 +175,7 @@ public class Server implements Runnable{
 						   // waiVc에 저장 
 						   waitVc.add(this);
 						   messageTo(Function.MYLOG+"|"+id);
+						   // 로그인창 => 대기실창으로 변경 
 						   // 로그인사람에게 접속한 사람들의 정보를 전송
 						   for(Client client:waitVc)
 						   {

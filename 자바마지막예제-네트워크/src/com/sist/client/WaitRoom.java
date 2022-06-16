@@ -30,7 +30,34 @@ public class WaitRoom extends JPanel{
     	 
     	 String[] col2={"ID","이름","성별","위치"};
     	 String[][] row2=new String[0][3];
-    	 model2=new DefaultTableModel(row2,col2);
+    	 /*
+    	  *   내부클래스 
+    	  *   --------
+    	  *   쓰레드 => 멤버클래스 (빅데이터,AI)
+    	  *   // 웹 => 상속(X) => 오라클 연동 ==> MusicDAO
+    	  *   class Server
+    	  *   {
+    	  *      Vector waitVc=new Vector() 
+    	  *       => Server,Client 공동으로 사용되는 변수,메소드
+    	  *      class Client extends Thread
+    	  *      {
+    	  *         
+    	  *      }
+    	  *   }
+    	  *   윈도우 => 익명의 클래스 
+    	  */
+    	 model2=new DefaultTableModel(row2,col2)
+         {
+
+    		// 편집 => 편집방지 (오버라이딩)
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+    		 // 익명의 클래스 => 상속없이 오버라이딩 
+    		 
+    	 };
     	 table2=new JTable(model2);
     	 JScrollPane js3=new JScrollPane(table2);
     	 
