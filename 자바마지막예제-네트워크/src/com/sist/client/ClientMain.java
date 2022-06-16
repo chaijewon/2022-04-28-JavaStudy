@@ -49,7 +49,7 @@ public class ClientMain extends JFrame implements ActionListener,Runnable{
 	{
 		try
 		{
-			s=new Socket("localhost",3355);
+			s=new Socket("211.63.89.121",3355);
 			// 서버를 연결해서 서버 정보를 읽어 온다 (ip,port)
 			in=new BufferedReader(new InputStreamReader(s.getInputStream()));
 			out=s.getOutputStream();
