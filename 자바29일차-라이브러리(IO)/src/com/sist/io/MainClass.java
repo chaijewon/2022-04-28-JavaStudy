@@ -22,8 +22,8 @@ public class MainClass extends JFrame implements Runnable,ActionListener{
     	tf4=new JTextField();
     	tf4.setHorizontalAlignment(JLabel.CENTER);
     	
-    	la1=new JLabel("1조");
-    	la2=new JLabel("2조");
+    	la1=new JLabel("2조");
+    	la2=new JLabel("1조");
     	la3=new JLabel("3조");
     	la4=new JLabel("4조");
     	
