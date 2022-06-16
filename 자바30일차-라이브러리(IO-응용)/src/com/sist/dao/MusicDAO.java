@@ -1,5 +1,7 @@
 package com.sist.dao;
 import java.sql.*;
+import java.util.ArrayList;
+
 import com.sist.vo.*;
 public class MusicDAO {
    private Connection conn;
@@ -84,6 +86,42 @@ public class MusicDAO {
 	   }
    }
    // 4-2. 데이터베이스에서 Music 읽기 
+   public ArrayList<Music> musicListData(int cno)
+   {
+	   ArrayList<Music> list=
+			   new ArrayList<Music>();
+	   try
+	   {
+		   getConnection();
+		   String sql="SELECT mno,poster,idcrement,"
+				     +"state,title,singr,album "
+				     +"FROM music "
+				     +"WHERE cno="+cno;
+		   ps=conn.prepareStatement(sql);
+		   ResultSet rs=ps.executeQuery();
+		   while(rs.next())
+		   {
+			   Music m=new Music();
+			   m.setMno(rs.getInt(1));
+			   m.setPoster(rs.getString(2));
+			   m.setIdcrement(rs.getInt(3));
+			   m.setState(rs.getString(4));
+			   m.setTitle(rs.getString(5));
+			   m.setSinger(rs.getString(6));
+			   m.setAlbum(rs.getString(7));
+			   list.add(m);
+		   }
+		   rs.close();
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+	   }
+	   finally
+	   {
+		   disConnection();
+	   }
+	   return list;
+   }
 }
 
 
